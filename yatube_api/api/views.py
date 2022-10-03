@@ -6,7 +6,9 @@ from .serializers import (
     FollowSerializer
 )
 from .permissions import IsAuthorPermission
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import (
+    IsAuthenticated, IsAuthenticatedOrReadOnly
+)
 from posts.models import Post, Group, Comment, Follow
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
@@ -27,7 +29,7 @@ class PostViewSet(ModelViewSet):
 class CommentViewSet(ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = (IsAuthorPermission,)
+    permission_classes = (IsAuthorPermission, IsAuthenticatedOrReadOnly)
 
     def get_queryset(self):
         return Comment.objects.filter(post=self.kwargs.get('post_id'))
@@ -47,7 +49,7 @@ class GroupViewSet(ReadOnlyModelViewSet):
 class FollowViewSet(ModelViewSet):
     queryset = Follow.objects.all()
     serializer_class = FollowSerializer
-    permission_classes = (IsAuthenticated, IsAuthorPermission)
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         return Follow.objects.filter(user=self.request.user)

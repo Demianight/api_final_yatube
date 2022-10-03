@@ -1,6 +1,6 @@
 ###
 
-POST http://127.0.0.1:8000/api/users/
+POST http://127.0.0.1:8000/api/v1/users/
 Content-Type: application/json
 
 {
@@ -8,10 +8,15 @@ Content-Type: application/json
     "password": "Demian197"
 }
 
+###
+
+GET http://127.0.0.1:8000/api/v1/users/
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
 
 ###
 
-POST http://127.0.0.1:8000/api/jwt/create/
+POST http://127.0.0.1:8000/api/v1/jwt/create/
 Content-Type: application/json
 
 {
@@ -21,7 +26,7 @@ Content-Type: application/json
 
 ###
 
-POST http://127.0.0.1:8000/api/jwt/refresh/
+POST http://127.0.0.1:8000/api/v1/jwt/refresh/
 Content-Type: application/json
 
 
@@ -31,11 +36,11 @@ Content-Type: application/json
 
 ###
 
-GET http://127.0.0.1:8000/api/v1/posts
+GET http://127.0.0.1:8000/api/v1/v1/posts
 
 ###
 
-POST http://127.0.0.1:8000/api/v1/posts/
+POST http://127.0.0.1:8000/api/v1/v1/posts/
 Content-Type: application/json
 Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
 
@@ -86,4 +91,25 @@ Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNj
 
 {
     "following": 3
+}
+
+
+###
+
+POST http://127.0.0.1:8000/api/v1/groups/
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
+{
+    "title": "Группа  номер 3"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/v1/posts/2/comments/
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
+{
+    
 }

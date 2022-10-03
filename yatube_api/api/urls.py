@@ -3,14 +3,14 @@ from rest_framework import routers
 from .views import PostViewSet, GroupViewSet, CommentViewSet, FollowViewSet
 
 
-router = routers.SimpleRouter()
-router.register(r'posts', PostViewSet)
-router.register(r'groups', GroupViewSet)
-router.register(r'posts/(?P<post_id>\d+)/comments', CommentViewSet)
-router.register(r'follow', FollowViewSet)
+router1 = routers.SimpleRouter()
+router1.register(r'posts', PostViewSet)
+router1.register(r'groups', GroupViewSet)
+router1.register(r'posts/(?P<post_id>\d+)/comments', CommentViewSet)
+router1.register(r'follow', FollowViewSet)
 
 urlpatterns = [
-    path('v1/', include(router.urls)),
-    path('', include('djoser.urls')),
-    path('', include('djoser.urls.jwt')),
+    path('v1/', include(router1.urls)),
+    path('v1/', include('djoser.urls')),
+    path('v1/', include('djoser.urls.jwt')),
 ]
