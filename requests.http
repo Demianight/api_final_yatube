@@ -1,0 +1,89 @@
+###
+
+POST http://127.0.0.1:8000/api/users/
+Content-Type: application/json
+
+{
+    "username": "komar",
+    "password": "Demian197"
+}
+
+
+###
+
+POST http://127.0.0.1:8000/api/jwt/create/
+Content-Type: application/json
+
+{
+    "username": "demian",
+    "password": "111"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/jwt/refresh/
+Content-Type: application/json
+
+
+{
+    "refresh": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTY2NDkwMDY0OCwianRpIjoiYzQ1YWQ2OTc2NDMxNGIyMjkxN2ZjZTYwZmM5OTY5MjMiLCJ1c2VyX2lkIjoxfQ.Jh_KmpxDF5FHSZIgu9pD_Cz1TJ2IGkvOsYDCl2ey7kE"
+}
+
+###
+
+GET http://127.0.0.1:8000/api/v1/posts
+
+###
+
+POST http://127.0.0.1:8000/api/v1/posts/
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
+{
+    "text": "New Post"
+}
+
+###
+
+GET http://127.0.0.1:8000/api/v1/posts/2/comments/
+
+###
+
+POST http://127.0.0.1:8000/api/v1/posts/2/comments/
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
+{
+    "text": "New comment"
+}
+
+###
+
+DELETE http://127.0.0.1:8000/api/v1/posts/2/comments/1/
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
+###
+
+PATCH http://127.0.0.1:8000/api/v1/posts/2/comments/3/
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
+{
+    "text": "Another text"    
+}
+
+###
+
+GET http://127.0.0.1:8000/api/v1/follow
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
+###
+
+POST http://127.0.0.1:8000/api/v1/follow/
+Content-Type: application/json
+Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjY2MTExMzExLCJqdGkiOiI2ODg3YzQxNWYzYjc0N2UxYTExNTA2ZTAxZDcxNmFjMSIsInVzZXJfaWQiOjF9.olK-zBs1_OAegsIsxPUaOz2iBgjXREms1dvC9liboDw
+
+{
+    "following": 3
+}
