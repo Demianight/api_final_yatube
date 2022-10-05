@@ -1,23 +1,19 @@
-from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
-from .serializers import (
-    PostSerializer,
-    CommentSerializer,
-    GroupSerializer,
-    FollowSerializer
-)
-from .permissions import IsAuthorPermission
-from rest_framework.permissions import IsAuthenticated
-from posts.models import Post, Group, Comment, Follow
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
+from posts.models import Group, Post
+from rest_framework import mixins, viewsets
 from rest_framework.filters import SearchFilter
 from rest_framework.pagination import LimitOffsetPagination
+from rest_framework.permissions import IsAuthenticated
 
+from .permissions import IsAuthorPermission
+from .serializers import (CommentSerializer, FollowSerializer, GroupSerializer,
+                          PostSerializer)
 
 User = get_user_model()
 
 
-class PostViewSet(ModelViewSet):
+class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     permission_classes = (IsAuthorPermission,)
@@ -27,13 +23,12 @@ class PostViewSet(ModelViewSet):
         serializer.save(author=self.request.user)
 
 
-class CommentViewSet(ModelViewSet):
-    queryset = Comment.objects.all()
+class CommentViewSet(viewsets.ModelViewSet):
     serializer_class = CommentSerializer
     permission_classes = (IsAuthorPermission,)
 
     def get_queryset(self):
-        return Comment.objects.filter(post=self.kwargs.get('post_id'))
+        return get_object_or_404(Post, id=self.kwargs.get('post_id')).comments
 
     def perform_create(self, serializer):
         serializer.save(
@@ -42,20 +37,23 @@ class CommentViewSet(ModelViewSet):
         )
 
 
-class GroupViewSet(ReadOnlyModelViewSet):
+class GroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 
 
-class FollowViewSet(ModelViewSet):
-    queryset = Follow.objects.all()
+class FollowViewSet(
+    mixins.ListModelMixin,
+    mixins.CreateModelMixin,
+    viewsets.GenericViewSet
+):
     serializer_class = FollowSerializer
     permission_classes = (IsAuthenticated,)
     filter_backends = (SearchFilter,)
     search_fields = ('following__username', 'user__username')
 
     def get_queryset(self):
-        return Follow.objects.filter(user=self.request.user)
+        return self.request.user.follows
 
     def perform_create(self, serializer):
         return serializer.save(
