@@ -44,6 +44,14 @@ class Follow(models.Model):
         related_name='followers'
     )
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(
+                fields=['follower', 'user'],
+                name='unique follow'
+            ),
+        ]
+
 
 class Group(models.Model):
     title = models.CharField(null=False, max_length=128)
